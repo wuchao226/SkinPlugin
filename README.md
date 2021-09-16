@@ -53,7 +53,7 @@ Hook技术 --- 反射、动态代理的使用
 
 
 
-
+```
 public void setFactory2(Factory2 factory) {
     // Factory2 只能创建一次
     if (mFactorySet) {
@@ -64,8 +64,8 @@ public void setFactory2(Factory2 factory) {
     }
     mFactorySet = true;
 }
-
-
+```
+```
 dispatchActivityCreated(savedInstanceState)@Activity.java
 --> onActivityCreated
 
@@ -83,7 +83,7 @@ performLaunchActivity@ActivityThread.java
 --> final AssetManager assets = createAssetManager(key);
 --> builder.addApkAssets(loadApkAssets(key.mResDir, false /*sharedLib*/,
                         false /*overlay*/));
-
+```
 
 
 AssertManager 加载资源 --》 资源路径 --》 默认传入的资源路径 key.mResDir（app下面的res）
@@ -92,30 +92,32 @@ Hook的思路：不能改变原有的资源加载，单独创建一个AssertMana
 
 
 
-
+```
 皮肤包的 
 0x7f070092  t_window_bg                         res/drawable-hdpi-v4/t_window_bg.jpg                            
 app的 
 0x7f070095  t_window_bg rgb8(0xffffffff)                        
 
 skinResources.Drawable(0x7f070095);
-
+```
 
 首先通过 app的资源id --》 找到 app的资源name --》 皮肤包的资源id
 
+```
 // app的resId
 String resName=mAppResources.getResourceEntryName(resId); // 通过app的resId 找到 resName
 String resType=mAppResources.getResourceTypeName(resId);// 通过app的resId 找到 类型，layout、drawable
 // 获取对应皮肤包的资源Id
 int skinId=mSkinResources.getIdentifier(resName,resType,mSkinPkgName);
-
+```
 
 参考：https://github.com/ximsfei/Android-skin-support#toc14
 
-
+```
 静态换肤  ---》 flag  
 if(){
     tv.setColor(红色);
 }else{
     tv.setColor(黑色);
 }
+```
