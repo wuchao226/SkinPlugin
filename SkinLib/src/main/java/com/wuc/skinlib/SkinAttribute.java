@@ -22,6 +22,7 @@ public class SkinAttribute {
 
   private static final List<String> mAttributes = new ArrayList<>();
 
+  // 需要换肤的属性
   static {
     mAttributes.add("background");
     mAttributes.add("src");
@@ -54,17 +55,23 @@ public class SkinAttribute {
         // @722727272
         String attributeValue = attrs.getAttributeValue(i);
         // 比如color 以#开头表示写死的颜色 不可用于换肤
+        // 固定的值如#FF00FF 色值
         if (attributeValue.startsWith("#")) {
           continue;
         }
         int resId;
         // 以 ？开头的表示使用 属性
+        // 系统属性 android:layout_height="?actionBarSize"
         if (attributeValue.startsWith("?")) {
           int attrId = Integer.parseInt(attributeValue.substring(1));
           resId = SkinThemeUtils.getResId(view.getContext(), new int[] { attrId })[0];
-        } else {
+        } else if (attributeValue.startsWith("@")) {
           // 正常以 @ 开头
+          // 正常情况 android:background="@drawable/toolbar"
           resId = Integer.parseInt(attributeValue.substring(1));
+        } else {
+          //其他
+          continue;
         }
         SkinPair skinPair = new SkinPair(attributeName, resId);
         skinPairs.add(skinPair);
@@ -108,6 +115,7 @@ public class SkinAttribute {
           case "background":
             Object background = SkinResources.getInstance().getBackground(skinPair.resId);
             //背景可能是 @color 也可能是 @drawable
+            // 比如@color/xxx
             if (background instanceof Integer) {
               mView.setBackgroundColor((int) background);
             } else {
@@ -147,6 +155,9 @@ public class SkinAttribute {
       }
     }
 
+    /**
+     * 自定义view支持
+     */
     private void applySkinSupport() {
       if (mView instanceof SkinViewSupport) {
         ((SkinViewSupport) mView).applySkin();

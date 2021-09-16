@@ -83,6 +83,7 @@ public class SkinManager extends Observable {
         // 根据当前的设备显示器信息 与 配置(横竖屏、语言等) 创建Resources
         Resources skinResources = new Resources(assetManager, appResource.getDisplayMetrics(),
             appResource.getConfiguration());
+
         // 获取外部Apk(皮肤包) 包名
         PackageManager pm = mContext.getPackageManager();
         // 获取未安装apk的信息  skinPath:apk文件的path

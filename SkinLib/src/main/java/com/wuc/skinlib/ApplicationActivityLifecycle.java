@@ -17,7 +17,7 @@ import java.util.Observable;
 /**
  * @author : wuchao5
  * @date : 2021/9/10 14:37
- * @desciption :
+ * @desciption : 注册Activity生命周期的回调
  */
 public class ApplicationActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
