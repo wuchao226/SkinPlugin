@@ -3,6 +3,8 @@
 ### 参考
 [插件化_换肤方案](https://forevercoder.com/2021/01/20/plugin_change_skin/)
 
+[解决mFactorySet在Android Q中被非SDK接口限制的问题](https://blog.csdn.net/qq_25412055/article/details/100033637)
+
 ### 效果图
 
 ![](https://github.com/wuchao226/SkinPlugin/blob/master/images/preview.gif)
